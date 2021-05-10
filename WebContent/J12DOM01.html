@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J12DOM01.html</title>
+</head>
+<body>
+    <script>
+        // 영문값을 받아서 한글로 변환 후 반환
+        var getString = function(param){
+            switch(param){
+                case "POL" :return "정치";
+                case "ECO" :return "경제";
+                case "ENT" :return "연예";
+            }
+        }
+
+        function fnGetElementsByTag(){
+            /*
+            태그명이 input인 요소를 모두 얻어온다.
+            */
+            var inputs = document.getElementsByTagName("input");
+            var checkString = "", inputString;
+
+            for(var i =0; i<input.length; i++){
+                /*
+                inputs배열의 요소 중 체크박스 타입이면서 checked 상태인 요소만 추출
+                */
+                if(inputs[i].type =="checkbox" && inputs[i].checked== true){
+                    // 해당 값의 value를 한글로 변환 후 checkString에 문자열로 연결
+                    checkString+= getString(inputs[i].value)+" ";
+
+                    // 해당 값을 체크박스 ->  버튼으로 변경하고
+                    inputs[i].type = "button";
+                    // value 값도 새로 부여해준다.
+                    inputs[i].value = "동적변경버튼"
+                }
+
+                // inputs배열의 요소 중 텍스트 타입이면서 name이 txt값이 요소만 추출
+                if(inputs[i].type=="text" && inputs[i].name == "txt"){
+                    // 해당 값의 value를 inputString에 연결
+                    inputString += inputs[i].value;
+                }
+            }
+            // 위에서 연결했던 문자열을 경고창에 띄워준다.
+            alert("선택값 : "+checkString+", 입력값 : "+inputString);
+        }
+
+        function fnGetDomain(){
+            // 태그명이 a인 요소를 모두 얻어온다.
+            var atags = document.getElementsByTagName("a");
+            for(var i=0; i<atags.length; i++){
+                /*
+                atags의 i번째 요소의 href(경로)속성을 대문자로 변경한 후
+                WWW라는 문자열의 위치를 찾아본다 => 문자열이 포함되었는지 확인한다.
+                */
+                if(atags[i].href.toUpperCase().indexOf("WWW")!=-1){
+                    // 확인 후 경고창을 띄워준다.
+                    alert(atags[i].href);
+                }
+            }
+
+
+        }
+
+    </script>
+
+    <h2>input/text/button 태그</h2>
+    <input type="checkbox" name="inter" value="POL" checked="checked">정치
+    <input type="checkbox" name="inter" value="ECO" >경제
+    <input type="checkbox" name="inter" value="ENT" checked="checked">연예
+
+    <input type="text" name="txt">
+    <!-- 버튼을 클릭 했을때 fnGetElementsByTag()함수를 호출함 -->
+    <input type="button" value="태그명으로 DOM객체 얻기" onclick="fnGetElementsByTag();">
+
+    <h2>a태그</h2>
+    <ul>
+        <!-- www 포함 -->
+        <li><a href="http://www.naver.com">네이버</a></li>
+        <!-- www 미포함 -->
+        <li><a href="http://daum.com">다음</a></li>
+    </ul>
+    <!-- 버튼을 클릭 했을때 fnGetDomain()함수를 호출함 -->
+    <button onclick="fnGetDomain();">도메인 얻어오기</button>
+</body>
+</html>

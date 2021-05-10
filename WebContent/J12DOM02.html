@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J12DOM02.html</title>
+</head>
+<body>
+    <script>
+        function fnGetElementsByName(){
+            // name이 inter인 DOM객체를 얻어온 후 배열로 반환
+            var names = document.getElementsByName("inter");
+            /*
+            checkbox
+                체크 : true / checked
+                체크 해제 : false / null
+            단, 체크 여부를 판단할때는 반드시 true/false를 사용해야한다.
+            */
+            for(var i=0; i<names.length; i++){
+                // names의 i번째 요소가 체크 되었다면
+                if(names[i].checked == true){
+                    // 해당 요소의 체크를 해제한다.
+                    names[i].checked = false;
+                // names의 i번째 요소가 체크 되어있지 않다면
+                }else if(names[i].checked == false){
+                    // 해당 요소를 체크한다.
+                    names[i].checked = true;
+                }
+            }
+        }
+
+        function fnGetElementsClassName(){
+            // 클래스명이 portal인 DOM객체를 얻어온다.
+            var portals = document.getElementsByClassName("portal");
+            for(var i=0;i<portals.length; i++){
+                // innerHTML => 해당 태그 사이에 입력된 값을 얻어온다.
+                // 얻어온 값을 경고창으로 출력한다.
+                alert(portals[i].innerHTML);
+            }
+        }
+
+    </script>
+
+    <script>
+        function fnChangeImage(imgNum){
+            // id가 trump인 객체를 얻어온다.
+            var imgtag = document.getElementById("trump");
+            // 해당 객체의 이미지를 번호별로 받아온다.
+            imgtag.src = "./images/"+imgNum + ".jpg";
+            // 해당 객체의 너비에 X10을 해준다.
+            imgtag.width = parseInt(imgNum*10);
+        }
+    </script>
+
+    <h2>이름으로 얻기</h2>
+    <input type="checkbox" name="inter" value="POL" checked="checked">정치
+    <input type="checkbox" name="inter" value="ECO" >경제
+    
+
+    <h3>아래 버튼을 누르시면 위 체크박스가 반전됩니다.</h3>
+    <input type="button"value="name 속성에 지정한 값으로 DOM값 얻기" 
+        onclick="fnGetElementsByName();">
+    
+
+    <h2>클래스명으로 객체얻기2</h2>
+    <ul>
+        <li><a href="#" class="portal">네<b>이</b>버</a></li>
+        <li><a href="#" class="portal">다음</a></li>
+        <li><a href="#" class="portal">네이트</a></li>
+    </ul>
+    <button onclick="fnGetElementsClassName();">클래스명으로 DOM객체 얻어오기</button>
+
+
+    <h2>동적으로 이미지 교체하기(ID로 DOM객체 얻기)</h2>
+    <fieldset>
+        <legend>이미지 동적 교체</legend>
+        <a href="javascript:fnChangeImage(1);">1번이미지</a>
+        <a href="javascript:fnChangeImage(2);">2번이미지</a>
+        <a href="javascript:fnChangeImage(3);">3번이미지</a>
+        <a href="javascript:fnChangeImage(4);">4번이미지</a>
+        <a href="javascript:fnChangeImage(5);">5번이미지</a>
+        <a href="javascript:fnChangeImage(6);">6번이미지</a>
+        <br>
+        <!-- src의 값은 fnChangeImage()에서 부여한다. -->
+        <img id="trump" src="" width="100" alt="이미지교체하기">
+    </fieldset>
+</body>
+</html>
